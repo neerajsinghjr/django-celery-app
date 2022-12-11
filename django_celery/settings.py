@@ -127,3 +127,22 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Email placeholder setting
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+"""
+These two entries give your Celery application instance enough information
+to know where to send messages and where to record the results. Because you’re
+using Redis as both your message broker and your database back end, both URLs 
+point to the same address.
+
+Note the CELERY_ namespace at the beginning of these setting variables. You 
+need to add this because of the namespace="CELERY" argument that you passed to 
+app.config_from_object() in line 8 of celery.py.
+
+NOTE: NEVER USED THE LOCALHOST VARIABLE FOR STATING CELERY URL;;
+"""
+### Celery broker settings;
+# CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+# CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+BROKER_URL = 'redis://localhost:6379/0'
+RESULT_BACKEND = 'redis://localhost:6379/0'
